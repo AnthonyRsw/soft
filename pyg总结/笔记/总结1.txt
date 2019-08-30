@@ -1,0 +1,71 @@
+Tomcat极限: 单台Tomcat极限基本是可以同时抗住500个并发.
+
+传统行业项目: 并发低, 数据量小, 不需要高可用, 例如: oa, erp, crm项目, 或者政府项目, 银行项目等.
+互联网项目: 高并发, 大数据量, 高可用 例如: 京东, 百度, 淘宝, 天猫, 饿了么, 美团, 滴滴, ofo, 钉钉
+
+品优购是一个全品类电商: 啥都卖  例如: 淘宝, 京东, 天猫
+垂直电商: 只卖一个行业的. 例如: 小红书, 也买酒, 当当网
+
+真正企业电商项目表最少80张.
+
+rpc远程过程调用协议: 是JDK底层提出的协议, dubbo只是对这个协议的实现的一个框架技术.
+	rpc协议就是跨服务器, 跨tomcat, 从一个项目, 调用另一个项目中的方法.
+
+什么是dubbo:
+	dubbo是阿里巴巴公司生产的一个rpc实现框架
+	dubbox是当当网维护的dubbo代码的版本.
+
+dubbo作用:
+	跨项目调用方法, 例如从A项目中的controller调用B项目中的service方法
+
+dubbo同类型的技术都有哪些:
+	rpc协议实现框架: dubbo, dubbox, springCloud
+	优点: 传输效率快, 缺点: controller和service两个项目必须都是Java语言实现
+
+	webService技术: 代表框架有cxf
+	底层使用的协议叫做soap协议, 其实传输的就是xml数据
+	优点: 可以跨语言跨平台, controller可以是Java语言实现, service可以是.net或者C语言等语言实现
+	缺点: 传输效率低
+
+dubbo怎么用:
+	
+	a) service实现类上写@Service注解, 注意这个@service注解不是spring包的是阿里的dubbo包下的
+	b) controller注入的时候使用@Refrence注解来进行注入, 也是阿里dubbo包下面的.
+	c) 如果controller和service之间传输pojo实体类, 那么实体类必须实现Java的序列化接口.
+
+
+zookeeper命令:
+启动:  ./zkServer.sh start
+关闭:  ./zkServer.sh stop
+查看状态: ./zkServer.sh status
+
+
+
+
+
+接口作用:
+	查询用户列表
+接口地址: http://192.168.200.xxx:8080/test/getUser.do
+传入参数:
+	无
+返回数据:
+	[{id:001, name:张三},{id:002, name:李四}]
+
+
+接口作用:
+	添加用户
+接口地址: http://192.168.200.xxx:8080/test/saveUser.do
+传入参数:
+	{name:张三, sex:1, address:北京市昌平区}
+返回数据:
+	无
+
+
+
+
+
+
+
+
+
+

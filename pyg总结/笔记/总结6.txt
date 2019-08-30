@@ -1,0 +1,69 @@
+注意: 
+1. springSecurity如果需要去数据库中找对应的用户对象进行验证, 就需要自定义UserDetailService实现类
+2. 因为在自定义的service中需要使用其他的service到数据库中查询, 所以需要注入, 而这里sellerService是在
+	service-sellerGoods项目中, 跨项目调用需要使用dubbo注入.
+3. 在springMvc.xml中虽然配置了包扫描但是扫描的是controller包, 只有在这个包下面写@Refrence注解才会生效
+4. 在我们UserDetailService实现类中无法使用dubbo注解进行注入, 所以我们这里利用xml配置文件的标签<dubbo:refrence
+	进行注入sellerService
+5. 在userDetailService中如果使用@Service注解无法指定注入的属性或者是对象, 所以这里我们使用最原始的
+	set方法注入, 可以在配置文件中配置bean, 在bean标签了配置<property标签注入SellerService属性
+
+
+
+分类表Item_cat: 自关联表, 自己关联自己, 这张表有主键id唯一, 有parentid字段指定父级的主键id
+	自关联表优点: 一张表可以通过这种关系做成一个树状关系
+		缺点: 在这张表数据量大的时候, 如果想展示整棵树所有节点数据加载会非常慢.
+
+
+
+
+
+SPU标准产品单位: 就是一个产品的统称, 是一个商品的单位
+SKU库存量单位: 一个产品的所有型号, 所有价钱, 所有规格都列出来, 具体的详细的每一个单位, 也就是库存单位
+SPU: iphone8
+SKU:	iphone8  64G  8000元  白色  联通
+	iphone8  64G  8000元  黑色  联通
+	iphone8  128G  9000元  黑色  联通
+	iphone8  128G  9000元  白色  联通
+	iphone8  64G  8000元  白色  移动
+	iphone8  64G  8000元  黑色  移动
+	iphone8  128G  9000元  黑色  移动
+	iphone8  128G  9000元  白色  移动
+一个ＳＰＵ单位对应多个ＳＫＵ单位
+
+
+表的纵切: 
+	使用场景: 一张表字段太多, 几十个甚至上百个字段, 没查询一条或者多条的时候, 返回数据太多,
+		页面展示不下, 所以没有必要一次性返回过都数据, 这个时候可以根据页面需要展示的数据, 将一张表
+		切分成多张表, 多张表的关系是一对一.
+	优点: 每次查询的时候返回数据量会变小, 提高网络io和磁盘io效率. 查询速度变快
+	缺点: 如果确实需要一次返回所有数据, 返回的数据量依然大, 增加表关系的复杂度. 不利于sql语句的编写.
+
+
+<select class="form-control" ng-model="entity.goods.category1Id" 
+	ng-options="xxx.id as xxx.name for xxx in itemCat1List">	
+
+ng-model: 将下拉框选中的数据, 封装到$scope域中变量叫做entity.goods.category1Id
+ng-option:指定下来选项的各项内容, 它的语法是for循环itemCat1List这个集合变量, 每次循环赋值给xxx这个变量
+	xxx.id作为key  xxx.name作为value, 选中一个后, 提交的数据是key, 这里as , for, in 都是语法关键字
+
+
+$scope.$watch("entity.goods.category1Id",function(newValue,oldValue){
+#watch是angularjs中的内置对象, 作用是监听$scope域中的某个变量发生了值的改变.
+
+
+富文本编辑器: 我们这里使用的是kindEditor这个. 其实就是一款网页版的word, 可以对文字图片等进行排版功能.
+	都是使用js+css实现的, 如果我们保存富文本编辑器里面的数据, 保存到数据库中是   文字+html+css
+
+
+
+
+
+
+
+
+
+
+
+
+

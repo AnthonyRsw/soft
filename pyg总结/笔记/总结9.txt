@@ -1,0 +1,98 @@
+redis中的五大数据类型:
+	string:  字符串
+	hash:	相当于map, 是一种键值对形式, 存入的数据是无序的, key不可以重复
+	list:	存入其中的数据是有序的, 存入其中的数据可以重复
+	set:	存入其中的数据是无序的, 存入其中的数据不可以重复
+	zset:	存入其中的数据是有序的, 存入其中的数据不可以重复
+
+
+什么是solr:
+	solr是一个apache的全文检索引擎系统, 就是个war包, 部署到Tomcat下就可以独立运行, 我们使用它的客户端工具包
+	solrj来远程调用solr服务器, 完成对索引库的操作(对索引库的添加修改删除, 查询)
+	solr底层使用lucene编写.
+作用:
+	对于大数据量搜索或者是查询, 速度非常快, 并且不会随着数据量的增大而减缓查询速度.
+	主要应用于大型的互联网项目中, 做大规模数据查询.
+solr同类型技术:
+	elasticsearch是solr的同类型技术, elasticsearch在搜索的时候速度比solr要快.但是使用起来比solr要复杂
+	企业中现在elasticsearch比较流行, 这个框架在项目二中学习.
+
+全文检索算法(倒排索引表算法):
+	使用场景: 大数据量搜索查询, 例如: 京东, 天猫的搜索功能.
+	描述: 查询前先将查询的内容抽取出来组成文档(document), 也就相当于字典的正文, 然后进行切分词, 将切分出来的
+		词组成索引(index)相当于字段的目录, 查询的时候先查询索引根据索引找文档, 这个过程叫做全文检索
+	总结: 和字典原理一样.
+	优点: 查询速度快, 并且不会随着查询的数据量增大而变慢, 查询结果精确
+	缺点: 索引会额外占用大量的磁盘空间.
+
+顺序扫描法:
+	使用场景: 数据库中的like模糊查询就是用的这种算法
+	描述: 拿着需要查询的关键字, 到内容中逐字逐行的对比, 直到查询内容结束
+	优点: 查询准确
+	缺点: 查询速度慢, 并且会随着查询内容量增大越来越慢.
+
+
+切分词: 将一句一句话, 切分成一个一个词, 去掉停用词(的, 地得, a,an,the等), 去掉空格和标点符号, 大写字母全部
+	转成小写字母.
+
+
+
+
+solr部署步骤:
+	1. 在/usr/local目录下创建solr文件夹
+	2. 复制solr安装包, ik分词器包, tomcat包到这个目录下, 并且解压
+	3. 将solr/example/webapps/solr.war复制到tomcat/webapps目录下
+	4. 启动tomcat目的是对war包解压, 解压完成后关闭tomcat
+	5. 到tomcat/webapps目录中删除solr.war
+	6. 复制solr/example/lib/ext下的所有到 tomcat/webapps/solr/WEB-INf/lib目录下
+	7. 复制solr/example/solr目录到 /usr/loca/solr目录下并且改名问solrhome
+	8. 配置solrhome的位置到tomcat/webapps/solr/WEB-INF/web.xml中
+	9. 启动tomcat, 浏览器访问http://服务器地址:端口/solr看到solr页面后证明部署成功
+
+
+
+solrhome就是solr的家, 一个solr服务器只能有一个solrhome, 一个solrhome中可以有多个solr实例, 里面的collection1
+文件夹就是默认的solr实例, 一个solrhome中可以同时有多个实例, 实例中有索引库, 实例和实例之间是互相隔离的.
+
+
+
+
+
+
+注意: 
+1. 域名要先定义后使用, 没有定义的域名直接使用会报错
+	ERROR: [doc=002] unknown field 'sadfasdfasdfasdf'
+2. solr中添加数据的时候必须有主键域id, 没有会报错
+	Document is missing mandatory uniqueKey field: id"
+
+3. solr中没有修改方法, 添加就是修改, 修改就是添加, 每次修改数据的时候, 都是根据id主键先去查询,
+	如果查到了, 将原有数据删除, 将新数据添加进去, 这就是修改, 如果没有根据id查询到数据, 则直接添加, 就成了
+	添加.
+
+4. 删除:
+根据id删除
+<delete>
+<query>id: 002</query>
+</delete>
+<commit/>
+删除所有:
+<delete>
+<query>*:*</query>
+</delete>
+<commit/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,49 @@
+1. $controller: 这个是angularjs中的内置对象, 用来做控制器继承使用 这里是伪继承, 继承后, 子controller就可以
+	调用父级controller里面的方法, 继承后, 子controller和父controller里面的$scope域中的数据共享.
+
+$controller('baseController',{$scope:$scope});是继承父控制器语法
+{$scope:$scope}作用是让当前控制器中$scope域中的数据和父级$scope域中的数据共享, 可以随便使用
+
+
+2. <insert id="insertSelective" parameterType="cn.itcast.core.pojo.specification.Specification" 
+    useGeneratedKeys="true" keyProperty="id">
+    mybatis的映射问文件中useGeneratedKeys属性是确定使用自增主键, keyProperty属性是自增后的主键自动返回到
+    传入参数Specification对象中的id属性中保存
+
+
+3. 事务在哪个层面上控制, 是否可以在dao层控制, 为什么?
+事务必须控制在service层, 不可以控制在dao层, 因为控制不住, 
+dao是按照单一职责原则设计的, 都是单表的增删改查, 为了高复用率.
+在service中可以调用多个dao中的多个方法, 进行组合业务查询或者是增删改.
+如果事务控制在多个dao中, 那么一个业务操作有可能涉及到多个dao, 每个dao一个事务, 这样
+如果有异常无法回滚. 所以必须控制在dao上一层也就是service层.
+
+设计原则: 开闭原则, 单一职责原则, 接口隔离原则, 里氏替代原则
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

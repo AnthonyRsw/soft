@@ -1,0 +1,60 @@
+什么是angularjs
+	angularjs是谷歌的一款前端框架.
+作用:
+	前端mvc三层体系架构, 可以在前端大量写业务代码, 分层开发. 低耦合, 方便扩展.
+
+
+Model:数据,其实就是angular变量($scope.XX);
+	$scope是angularjs的内置对象, $scope中有请求的数据有响应的数据, 还有方法也都放进去. 它的作用域范围是当前页面
+
+View: 数据的呈现,Html+Directive(指令);
+	view=html页面 + 指令(也就是页面上的事件)
+
+Controller:操作数据,就是function,数据的增删改查;
+	
+
+angularjs知识点:
+1. 如果需要用angularjs必须在页面引入核心包<script src="angular.min.js"></script>
+2. 如果使用angularjs必须在页面body标签上写上ng-app表示使用angularjs应用
+3. 表达式, 页面如果需要展示数据需要用两个大括号{{表达式或者变量}}
+4. ng-model指令是给input框起名, 后台如果接收表单数据, 就可以根据ng-model中的属性名获取值, 页面也可以根据
+	ng-model来获取这个input框对象, ng-model中的值是放入当前页面的$scope中保存
+5. $scope是angularjs的内置对象, $scope中有请求的数据有响应的数据, 还有方法也都放进去. 它的作用域范围是当前页面
+6. ng-init指令: angularjs中只要页面一加载首先执行ng-init中的操作
+7. var app=angular.module('myApp',[]); //定义了一个叫myApp的模块, 定义后在body标签上声明使用的模块名称
+8. app.controller('myController',function($scope)在模块中声明控制器, 定以后需要在body标签上声明使用的控制器
+9. ng-click鼠标单击指令: 就是鼠标单击事件
+10. <tr ng-repeat="qqq in list">循环遍历: ng-repeat是循环指令, 里面in关键字后面是需要遍历的集合变量,in前面是我们自己
+	起名的一个临时变量, 每一次循环都会将循环出来的数据赋值给我们的临时变量, 在循环下就可以使用两个大括号将
+	将循环出来的值展示到页面上.
+11. $http是angularjs的内置对象, 主要做发送http请求并且是ajax请求, $http.get是发送get请求, $http.post是发送post请求.
+12. $event是angularjs中的内置对象, 作用是从$event当中可以获取当前操作的事件是什么.例如如果是复选框那么
+	可以中里面知道是勾选还是取消勾选
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,47 @@
+什么是docker:
+	docker是一种容器化技术, 也可以说是一种虚拟化技术.
+	通俗的理解就是一个高性能, Linux服务器上才能用的虚拟机软件.
+
+docker跟vmware虚拟机区别:
+docker:
+	Linux服务器上才可以用
+	高性能,
+	docker虚拟出来的虚拟机只能是linux系统
+
+vmware:
+	window版虚拟机软件
+	低性能
+	vmware可以虚拟出windows, linux, centos, unix等系统
+
+
+
+我们在企业用docker做什么用?
+	使用docker进行部署, 降低企业运营部署成本, 基本实现零成本部署
+	docker解决了部署的时候, 同一台机器软件版本差异化造成的冲突问题
+	docker对于硬件资源的管理, 非常擅长, 能更好的发挥每一台机器的性能.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
